@@ -1,23 +1,37 @@
-﻿CREATE TABLE "advocate" (
-    "id" int   NOT NULL,
-    "first_name" string   NOT NULL,
-    "last_name" string   NOT NULL,
-    "email" string   NOT NULL,
-    "password" string   NOT NULL,
-    "milestone" string   NOT NULL,
-    "start_date_of_current_milestone" date   NOT NULL,
-    "team_lead" string   NOT NULL,
-    "manager" string   NOT NULL,
-    CONSTRAINT "pk_advocate" PRIMARY KEY (
-        "id"
-     )
+﻿CREATE TABLE advocate (
+    id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    first_name VARCHAR(50)   NOT NULL,
+    last_name VARCHAR(50)   NOT NULL,
+    email VARCHAR(50)   NOT NULL,
+    password TEXT NOT NULL,
+    hire_date DATE NOT NULL,
+    milestone VARCHAR(50)   NOT NULL,
+    start_date_of_current_milestone DATE NOT NULL,
+    team_lead VARCHAR(50)   NOT NULL,
+    manager VARCHAR(50)   NOT NULL,
+    date_created TIMESTAMP without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE "skills" (
-    "advocate_id" int   NOT NULL,
-    "skill_name" string   NOT NULL
+CREATE TABLE skills (
+    advocate_id INTEGER
+        REFERENCES advocate ON DELETE CASCADE
+    skill_id VARCHAR(50)
+        REFERENCES skill_types ON DELETE CASCADE
+    PRIMARY KEY (advocate_id, skill_id)
 );
 
-ALTER TABLE "skills" ADD CONSTRAINT "fk_skills_advocate_id" FOREIGN KEY("advocate_id")
-REFERENCES "advocate" ("id");
+CREATE TABLE skill_types (
+    skill_id INTEGER PRIMARY KEY,
+    skill_name VARCHAR(50) NOT NULL
+)
+
+CREATE TABLE users (
+    user_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name VARCHAR(40) NOT NULL,
+    last_name VARCHAR(40) NOT NULL,
+    email TEXT NOT NULL UNIQUE,
+        CHECK (position('@' IN email) > 1),
+    is_admin BOOLEAN NOT NULL DEFAULT FALSE
+)
+
 
