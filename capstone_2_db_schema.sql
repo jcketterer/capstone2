@@ -6,7 +6,7 @@
     password TEXT NOT NULL,
     hire_date DATE NOT NULL,
     milestone VARCHAR(50)   NOT NULL,
-    start_date_of_current_milestone DATE NOT NULL,
+    current_milestone_start_date DATE NOT NULL,
     team_lead VARCHAR(50)   NOT NULL,
     manager VARCHAR(50)   NOT NULL,
     date_created TIMESTAMP without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
