@@ -7,7 +7,7 @@ function sqlForPartialUpdate(data, jsonToSql) {
   const cols = keys.map((colName, i) => `"${jsonToSql[colName] || colName}"=$${i + 1}`);
 
   return {
-    setColumns: cols.join(', '),
+    setCols: cols.join(', '),
     values: Object.values(data),
   };
 }

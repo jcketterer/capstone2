@@ -52,6 +52,8 @@ class User {
       throw new BadRequestError(`Duplicate username: ${username}`);
     }
 
+    const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
+
     const res = await db.query(
       `
       INSERT INTO users
@@ -59,10 +61,10 @@ class User {
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING username, password, first_name AS "firstName", last_name AS "lastName", email, is_admin AS "isAdmin"
       `,
-      [username, password, firstName, lastName, email, isAdmin]
+      [username, hashedPassword, firstName, lastName, email, isAdmin]
     );
 
-    const user = res.row[0];
+    const user = res.rows[0];
     return user;
   }
 
@@ -82,8 +84,8 @@ class User {
     return res.rows;
   }
 
-  static async getOneUser(username) {
-    const res = await db.query(
+  static async get(username) {
+    const userRes = await db.query(
       `
       SELECT
         username,
@@ -91,12 +93,13 @@ class User {
         last_name AS "lastName",
         email,
         is_admin AS "isAdmin"
-      FROM user
+      FROM users
       WHERE username = $1
       `,
       [username]
     );
-    const user = res.rows[0];
+    const user = userRes.rows[0];
+    console.log(user);
 
     if (!user) throw new NotFoundError(`No User: ${username}`);
   }
