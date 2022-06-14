@@ -1,0 +1,90 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema",
+  "$id": "http://example.com/example.json",
+  "title": "Root Schema",
+  "description": "The root schema is the schema that comprises the entire JSON document.",
+  "type": "object",
+  "default": {},
+  "required": [
+    "firstName",
+    "lastName",
+    "email",
+    "hireDate",
+    "milestone",
+    "current_milestone_start_date",
+    "teamLead",
+    "manager"
+  ],
+  "properties": {
+    "firstName": {
+      "title": "The firstName Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["JC"]
+    },
+    "lastName": {
+      "title": "The lastName Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["Ketterer"]
+    },
+    "email": {
+      "title": "The email Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["jketterer@CVNA.com"]
+    },
+    "hireDate": {
+      "title": "The hireDate Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "format": "date",
+      "default": "",
+      "examples": ["2018-01-08"]
+    },
+    "milestone": {
+      "title": "The milestone Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["M0"]
+    },
+    "current_milestone_start_date": {
+      "title": "The current_milestone_start_date Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "format": "date",
+      "default": "",
+      "examples": ["2020-01-01"]
+    },
+    "teamLead": {
+      "title": "The teamLead Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["Eileen Fronde"]
+    },
+    "manager": {
+      "title": "The Manager Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "default": "",
+      "examples": ["Tom Class"]
+    }
+  },
+  "examples": [
+    {
+      "firstName": "JC",
+      "lastName": "Ketterer",
+      "email": "jketterer@CVNA.com",
+      "hireDate": "2018-01-08",
+      "milestone": "M0",
+      "current_milestone_start_date": "2020-01-01",
+      "teamLead": "Eileen Fronde",
+      "manager": "Tom Class"
+    }
+  ]
+}

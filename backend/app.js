@@ -3,7 +3,8 @@ const cors = require('cors');
 const { NotFoundError } = require('./expressError');
 const { authenticateJWT } = require('./middleware/auth');
 const authRoutes = require('./routes/auth');
-const usersRoutes = require('./routes/user');
+const usersRoutes = require('./routes/users');
+const advocateRoutes = require('./routes/advocates');
 
 const morgan = require('morgan');
 
@@ -13,8 +14,10 @@ app.use(cors());
 app.use(express.json());
 app.use(morgan('tiny'));
 app.use(authenticateJWT);
+
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
+app.use('/advo', advocateRoutes);
 
 app.use(function (req, res, next) {
   return next(new NotFoundError());
