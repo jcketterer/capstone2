@@ -178,6 +178,58 @@ class Advocate {
 
     return advocate;
   }
+
+  static async update(id, data) {
+    if (Object.entries(data).length === 0)
+      throw new BadRequestError('No data provided for update.');
+
+    const { setCols, values } = sqlForPartialUpdate(data, {
+      firstName: 'first_name',
+      lastName: 'last_name',
+      hireDate: 'hire_date',
+      teamLead: 'team_lead',
+    });
+    console.log(setCols);
+
+    const idIndex = '$' + (values.length + 1);
+
+    const query = `UPDATE advocate 
+                    SET ${setCols}
+                    WHERE advocate_id = ${idIndex}
+                  RETURNING advocate_id, 
+                            first_name AS "firstName",
+                            last_name AS "lastName", 
+                            email,
+                            hire_date AS "hireDate",
+                            milestone, 
+                            team_lead AS "teamLead", 
+                            manager`;
+
+    console.log(query);
+
+    const res = await db.query(query, [...values, id]);
+    const advocate = res.rows[0];
+
+    if (!advocate) throw new NotFoundError(`Advocate with id of ${id} not found.`);
+
+    return advocate;
+  }
+
+  static async remove(id) {
+    const res = await db.query(
+      `
+        DELETE
+        FROM advocate
+        WHERE advocate_id = $1
+        RETURNING advocate_id
+      `,
+      [id]
+    );
+
+    const advocate = res.rows[0];
+
+    if (!advocate) throw new NotFoundError(`Advocate with id of ${id} not found`);
+  }
 }
 
 module.exports = Advocate;
