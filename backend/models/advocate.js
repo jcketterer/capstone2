@@ -13,7 +13,7 @@ class Advocate {
     const advocateRes = await db.query(
       `
         SELECT
-          advocate_id,
+          advocate_id AS "advocateId",
           first_name AS "firstName",
           last_name AS "lastName", 
           email,
@@ -51,7 +51,7 @@ class Advocate {
         INSERT INTO advocate
         (first_name, last_name, email, hire_date, milestone, current_milestone_start_date, team_lead, manager)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING advocate_id, first_name AS "firstName", last_name AS "lastName", email, hire_date AS "hireDate", milestone, current_milestone_start_date, team_lead AS "teamLead", manager
+        RETURNING advocate_id AS "advocateId", first_name AS "firstName", last_name AS "lastName", email, hire_date AS "hireDate", milestone, current_milestone_start_date, team_lead AS "teamLead", manager
       `,
       [
         firstName,
@@ -121,7 +121,7 @@ class Advocate {
     const advocateRes = await db.query(
       `
         SELECT
-          advocate_id,
+          advocate_id AS "advocateId",
           first_name AS "firstName",
           last_name AS "lastName", 
           email,
@@ -143,7 +143,7 @@ class Advocate {
     let advocateRes = await db.query(
       `
         SELECT 
-          advocate_id,
+          advocate_id AS "advocateId",
           first_name AS "firstName",
           last_name AS "lastName", 
           email,
@@ -164,12 +164,10 @@ class Advocate {
 
     let skillRes = await db.query(
       `
-      SELECT st.skill_name AS "skillName"
-      FROM skill_types AS st
-      INNER JOIN skills AS s 
-        ON s.skill_id = st.skill_id
+      SELECT ads.skill_name 
+      FROM advocate_skills AS ads
       INNER JOIN advocate AS a 
-        ON a.advocate_id = s.advocate_id
+      ON a.advocate_id = ads.advocates_id
       WHERE a.advocate_id = $1;
       `,
       [id]
@@ -196,7 +194,7 @@ class Advocate {
     const query = `UPDATE advocate 
                     SET ${setCols}
                     WHERE advocate_id = ${idIndex}
-                  RETURNING advocate_id, 
+                  RETURNING advocate_id AS "advocateId", 
                             first_name AS "firstName",
                             last_name AS "lastName", 
                             email,
@@ -221,7 +219,7 @@ class Advocate {
         DELETE
         FROM advocate
         WHERE advocate_id = $1
-        RETURNING advocate_id
+        RETURNING advocate_id AS "advocateId"
       `,
       [id]
     );
@@ -229,6 +227,112 @@ class Advocate {
     const advocate = res.rows[0];
 
     if (!advocate) throw new NotFoundError(`Advocate with id of ${id} not found`);
+  }
+
+  static async addSkill(advocateId, skill) {
+    const { name } = skill || {};
+
+    if (!name) throw new BadRequestError('Cannot add skill without name');
+
+    let advocateCheck = await db.query(
+      `
+        SELECT 
+          advocate_id,
+          first_name,
+          last_name
+        FROM advocate
+        WHERE advocate_id = $1
+      `,
+      [advocateId]
+    );
+    if (!advocateCheck.rows[0])
+      throw new NotFoundError(`Advocate with id ${advocateId} not found`);
+
+    let skillCheck = await db.query(
+      `
+        SELECT
+          name
+        FROM skills
+        WHERE name = $1
+      `,
+      [name]
+    );
+
+    if (!skillCheck.rows[0]) throw new NotFoundError(`Skill with name ${name} not found.`);
+
+    let duplicateCheck = await db.query(
+      `
+        SELECT 
+          advocates_id,
+          skill_name
+        FROM advocate_skills
+        WHERE advocates_id = $1 AND skill_name = $2
+      `,
+      [advocateId, name]
+    );
+
+    if (duplicateCheck.rows[0])
+      throw new BadRequestError(`Adovcate ${advocateId} already is skilled for ${name}`);
+
+    let res = await db.query(
+      `
+        INSERT INTO advocate_skills (advocates_id, skill_name)
+        VALUES ($1, $2)
+        RETURNING 
+          advocates_id AS "advocatesId",
+          skill_name AS "skillName"
+      `,
+      [advocateId, name]
+    );
+
+    return res.rows[0];
+  }
+
+  static async removeSkill(advocateId, skillName) {
+    if (!advocateId || !skillName)
+      throw new BadRequestError('Please state an skill and an advocate to remove skill.');
+
+    let advoCheck = await db.query(
+      `
+        SELECT 
+          advocate_id,
+          first_name, 
+          last_name
+        FROM advocate
+        WHERE advocate_id = $1
+      `,
+      [advocateId]
+    );
+
+    if (!advoCheck.rows[0])
+      throw new NotFoundError(`Advocate with id ${advocateId} not found`);
+
+    let advoDoesHaveSkill = await db.query(
+      `
+        SELECT
+          advocates_id,
+          skill_name
+        FROM advocate_skills
+        WHERE advocates_id = $1 AND skill_name = $2
+      `,
+      [advocateId, skillName]
+    );
+
+    if (!advoDoesHaveSkill.rows[0])
+      throw new NotFoundError(`Advocate with id is not skilled for ${skillName}`);
+
+    let res = await db.query(
+      `
+        DELETE FROM advocate_skills
+        WHERE advocates_id = $1 AND skill_name = $2
+        RETURNING advocates_id AS "advocateId", skill_name AS "skillName"
+      `,
+      [advocateId, skillName]
+    );
+
+    if (!res.rows[0]) throw new Error('ERROR DURING SKILL REMOVAL');
+
+    return { skillRemoved: res.rows[0] };
   }
 }
 

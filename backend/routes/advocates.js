@@ -87,4 +87,32 @@ router.delete('/:id', ensureAdmin, async function (req, res, next) {
   }
 });
 
+router.post('/:id/addskill/:name', ensureLoggedIn, async function (req, res, next) {
+  try {
+    const advocateSkill = await Advocate.addSkill(req.params.id, {
+      name: req.params.name,
+    });
+
+    if (!advocateSkill) throw new BadRequestError();
+
+    return res.json({ added: advocateSkill });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+router.delete('/:id/delskill/:name', ensureAdmin, async function (req, res, next) {
+  try {
+    await Advocate.removeSkill(req.params.id, req.params.name);
+    return res.json({
+      deletedSkill: {
+        AdovcateId: req.params.id,
+        skillName: req.params.name,
+      },
+    });
+  } catch (err) {
+    return next(err);
+  }
+});
+
 module.exports = router;
