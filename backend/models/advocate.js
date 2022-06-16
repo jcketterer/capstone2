@@ -51,7 +51,16 @@ class Advocate {
         INSERT INTO advocate
         (first_name, last_name, email, hire_date, milestone, current_milestone_start_date, team_lead, manager)
         VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
-        RETURNING advocate_id AS "advocateId", first_name AS "firstName", last_name AS "lastName", email, hire_date AS "hireDate", milestone, current_milestone_start_date, team_lead AS "teamLead", manager
+        RETURNING 
+          advocate_id AS "advocateId", 
+          first_name AS "firstName", 
+          last_name AS "lastName", 
+          email, 
+          hire_date AS "hireDate", 
+          milestone, 
+          current_milestone_start_date, 
+          team_lead AS "teamLead", 
+          manager
       `,
       [
         firstName,

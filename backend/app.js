@@ -5,6 +5,7 @@ const { authenticateJWT } = require('./middleware/auth');
 const authRoutes = require('./routes/auth');
 const usersRoutes = require('./routes/users');
 const advocateRoutes = require('./routes/advocates');
+const skillRoutes = require('./routes/skills');
 
 const morgan = require('morgan');
 
@@ -18,6 +19,7 @@ app.use(authenticateJWT);
 app.use('/auth', authRoutes);
 app.use('/users', usersRoutes);
 app.use('/advo', advocateRoutes);
+app.use('/skill', skillRoutes);
 
 app.use(function (req, res, next) {
   return next(new NotFoundError());
