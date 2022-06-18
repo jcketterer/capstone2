@@ -21,15 +21,15 @@ CREATE TABLE users (
 );
 
 CREATE TABLE skills (
-    name VARCHAR(40) PRIMARY KEY,
-    skill_id SERIAL
+    skill_id SERIAL,
+    name VARCHAR(40) PRIMARY KEY
 );
 
 CREATE TABLE advocate_skills (
     advocates_id INTEGER
-        REFERENCES advocate ON DELETE CASCADE,
+        REFERENCES advocate ON DELETE CASCADE ON UPDATE CASCADE,
     skill_name VARCHAR(40)
-        REFERENCES skills ON DELETE CASCADE,
+        REFERENCES skills ON DELETE CASCADE ON UPDATE CASCADE,
     PRIMARY KEY (advocates_id, skill_name)
 );
 
