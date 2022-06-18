@@ -15,4 +15,4 @@ DROP DATABASE advocate_test;
 CREATE DATABASE advocate_test;
 \connect advocate_test;
 
-\i advocate_test.sql
+\i advocate_schema.sql

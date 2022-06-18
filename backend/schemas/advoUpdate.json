@@ -21,10 +21,18 @@
       "default": "",
       "examples": ["jketterer@CVNA.com"]
     },
+    "hireDate": {
+      "type": "string",
+      "format": "date"
+    },
     "milestone": {
       "type": "string",
       "default": "",
       "examples": ["M0"]
+    },
+    "current_milestone_start_date": {
+      "type": "string",
+      "format": "date"
     },
     "teamLead": {
       "type": "string",
@@ -42,7 +50,9 @@
       "firstName": "JC",
       "lastName": "Ketterer",
       "email": "jketterer@CVNA.com",
+      "hireDate": "2020-01-01",
       "milestone": "M0",
+      "current_milestone_start_date": "2022-04-01",
       "teamLead": "Eileen Fronde",
       "manager": "Tom Class"
     }

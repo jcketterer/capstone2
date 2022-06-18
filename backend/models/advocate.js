@@ -173,7 +173,7 @@ class Advocate {
 
     let skillRes = await db.query(
       `
-      SELECT ads.skill_name 
+      SELECT ads.skill_name AS "skillName"
       FROM advocate_skills AS ads
       INNER JOIN advocate AS a 
       ON a.advocate_id = ads.advocates_id
@@ -209,7 +209,8 @@ class Advocate {
                             email,
                             hire_date AS "hireDate",
                             milestone, 
-                            team_lead AS "teamLead", 
+                            team_lead AS "teamLead",
+                            current_milestone_start_date,
                             manager`;
 
     console.log(query);

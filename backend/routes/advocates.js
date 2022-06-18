@@ -106,7 +106,7 @@ router.delete('/:id/delskill/:name', ensureAdmin, async function (req, res, next
     await Advocate.removeSkill(req.params.id, req.params.name);
     return res.json({
       deletedSkill: {
-        AdovcateId: req.params.id,
+        adovcateId: req.params.id,
         skillName: req.params.name,
       },
     });

@@ -8,7 +8,7 @@
     current_milestone_start_date DATE NOT NULL,
     team_lead VARCHAR(50)   NOT NULL,
     manager VARCHAR(50)   NOT NULL,
-    date_created TIMESTAMP without time zone NOT NULL DEFAULT CURRENT_TIMESTAMP
+    date_created DATE NOT NULL DEFAULT CURRENT_DATE
 );
 
 CREATE TABLE users (
