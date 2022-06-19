@@ -25,8 +25,14 @@
       "title": "The email Schema",
       "description": "An explanation about the purpose of this instance.",
       "type": "string",
-      "format": "email",
-      "default": "",
+      "anyOf": [
+        {
+          "format": "email"
+        },
+        {
+          "format": "string"
+        }
+      ],
       "examples": ["jketterer@CVNA.com"]
     },
     "milestone": {
@@ -35,6 +41,21 @@
       "type": "string",
       "default": "",
       "examples": ["M0"]
+    },
+    "current_milestone_start_date": {
+      "title": "The current_milestone_start_date Schema",
+      "description": "An explanation about the purpose of this instance.",
+      "type": "string",
+      "anyOf": [
+        {
+          "format": "date"
+        },
+        {
+          "format": "date-time"
+        }
+      ],
+      "default": "",
+      "examples": ["2020-01-01"]
     },
     "teamLead": {
       "title": "The teamLead Schema",

@@ -196,7 +196,6 @@ class Advocate {
       hireDate: 'hire_date',
       teamLead: 'team_lead',
     });
-    console.log(setCols);
 
     const idIndex = '$' + (values.length + 1);
 

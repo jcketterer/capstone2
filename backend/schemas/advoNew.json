@@ -42,7 +42,14 @@
       "title": "The hireDate Schema",
       "description": "An explanation about the purpose of this instance.",
       "type": "string",
-      "format": "date",
+      "anyOf": [
+        {
+          "format": "date"
+        },
+        {
+          "format": "date-time"
+        }
+      ],
       "default": "",
       "examples": ["2018-01-08"]
     },
@@ -57,7 +64,14 @@
       "title": "The current_milestone_start_date Schema",
       "description": "An explanation about the purpose of this instance.",
       "type": "string",
-      "format": "date",
+      "anyOf": [
+        {
+          "format": "date"
+        },
+        {
+          "format": "date-time"
+        }
+      ],
       "default": "",
       "examples": ["2020-01-01"]
     },

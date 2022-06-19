@@ -1,13 +1,14 @@
 'use strict';
 
-const db = require('../database');
+const db = require('../database.js');
 const User = require('../models/user');
 const Advocate = require('../models/advocate');
 const Skill = require('../models/skill');
 const { createToken } = require('../helper/token');
+const parse = require('postgres-date');
 
 async function commonBeforeAll() {
-  await db.query('TRUNCATE TABLE skill CASCADE');
+  await db.query('TRUNCATE TABLE skills CASCADE');
   await db.query('TRUNCATE TABLE advocate RESTART IDENTITY CASCADE');
   await db.query('TRUNCATE TABLE users CASCADE');
 
@@ -80,8 +81,9 @@ async function commonBeforeAll() {
     isAdmin: false,
   });
 
-  await Advocate.addSkill(1, { name: 'NewSkill1' });
-  await Advocate.addSkill(1, { name: 'NewSkill2' });
+  await Advocate.addSkill(1, { name: 'Sk1' });
+  await Advocate.addSkill(1, { name: 'Sk2' });
+  await Advocate.addSkill(2, { name: 'Sk1' });
 }
 
 async function commonBeforeEach() {

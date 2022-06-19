@@ -71,7 +71,6 @@ router.patch('/:id', ensureAdmin, async function (req, res, next) {
     }
 
     const advocate = await Advocate.update(req.params.id, req.body);
-    console.log(advocate);
     return res.json({ advocate });
   } catch (err) {
     return next(err);
@@ -87,7 +86,7 @@ router.delete('/:id', ensureAdmin, async function (req, res, next) {
   }
 });
 
-router.post('/:id/addskill/:name', ensureLoggedIn, async function (req, res, next) {
+router.post('/:id/addskill/:name', ensureAdmin, async function (req, res, next) {
   try {
     const advocateSkill = await Advocate.addSkill(req.params.id, {
       name: req.params.name,
@@ -106,7 +105,7 @@ router.delete('/:id/delskill/:name', ensureAdmin, async function (req, res, next
     await Advocate.removeSkill(req.params.id, req.params.name);
     return res.json({
       deletedSkill: {
-        adovcateId: req.params.id,
+        advocateId: req.params.id,
         skillName: req.params.name,
       },
     });
