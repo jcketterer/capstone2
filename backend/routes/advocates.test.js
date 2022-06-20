@@ -354,4 +354,30 @@ describe('DELETE /advo/:id/delskill/:name', function () {
       },
     });
   });
+
+  test('should throw unauth if they are a non-admin user', async function () {
+    const res = await request(app)
+      .delete('/advo/1/delskill/Sk1')
+      .set('authorization', `Bearer ${user1Token}`);
+    expect(res.statusCode).toEqual(401);
+  });
+
+  test('should throw unauth for someone not logged in', async function () {
+    const res = await request(app).delete('/advo/1/delskill/Sk1');
+    expect(res.statusCode).toEqual(401);
+  });
+
+  test('should throw not found if advocate id is not valid', async function () {
+    const res = await request(app)
+      .delete('/advo/6541/delskill/Sk1')
+      .set('authorization', `Bearer ${adminToken}`);
+    expect(res.statusCode).toEqual(404);
+  });
+
+  test('should throw not found if skill is invalid', async function () {
+    const res = await request(app)
+      .delete('/advo/6541/delskill/badskill')
+      .set('authorization', `Bearer ${adminToken}`);
+    expect(res.statusCode).toEqual(404);
+  });
 });

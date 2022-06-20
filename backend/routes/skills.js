@@ -31,7 +31,7 @@ router.post('/', ensureAdmin, async function (req, res, next) {
 router.get('/', ensureLoggedIn, async function (req, res, next) {
   try {
     const query = req.query;
-
+    console.log(query);
     const validator = jsonschema.validate(query, skillGetSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);

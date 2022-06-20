@@ -8,7 +8,7 @@ const { createToken } = require('../helper/token');
 const parse = require('postgres-date');
 
 async function commonBeforeAll() {
-  await db.query('TRUNCATE TABLE skills CASCADE');
+  await db.query('TRUNCATE TABLE skills RESTART IDENTITY CASCADE');
   await db.query('TRUNCATE TABLE advocate RESTART IDENTITY CASCADE');
   await db.query('TRUNCATE TABLE users CASCADE');
 
