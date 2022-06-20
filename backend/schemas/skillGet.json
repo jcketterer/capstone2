@@ -15,5 +15,6 @@
     {
       "name": "General"
     }
-  ]
+  ],
+  "additionalProperties": false
 }
