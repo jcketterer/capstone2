@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import AdvocateAPI from './AdvocateAPI';
+import AdvocateAPI from './api';
 
 const TokenSetter = ({ token }) => {
   useEffect(() => {

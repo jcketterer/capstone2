@@ -1,24 +1,34 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Container from 'react-bootstrap/Container';
+import UserContext from './UserContext';
+import TokenSetter from './TokenSetter';
+import Homepage from './Homepage';
+import getHelpers, { useLocalStorage } from './Helper';
+import AdvocateAlert from './AdvocateAlert';
+import AlertContext from './AlertContext';
 import './App.css';
 
 function App() {
+  const [user, setUser] = useLocalStorage('advocate-user', {});
+  const [token, setToken] = useLocalStorage('advocate-token', '');
+
+  const [message, setMessage] = useState({
+    text: '',
+    variant: '',
+  });
+
+  const [logIn, logOut, signUp, editUser] = getHelpers(user, setUser, setMessage, setToken);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserContext.Provider value={user}>
+      <AlertContext.Provider value={{ message, setMessage }}>
+        <Container className="mt-3" fluid="lg">
+          <div className="App">
+            <Homepage />
+          </div>
+        </Container>
+      </AlertContext.Provider>
+    </UserContext.Provider>
   );
 }
 
