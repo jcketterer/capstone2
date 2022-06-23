@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Alert from '../common/Alert';
 
@@ -43,6 +43,7 @@ const LoginForm = ({ login }) => {
                   name="username"
                   className="form-control"
                   value={formData.username}
+                  onChange={handleChange}
                   autoComplete="username"
                   required
                 />

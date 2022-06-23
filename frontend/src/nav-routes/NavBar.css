@@ -1,0 +1,23 @@
+img {
+  height: 60px;
+  width: 60px;
+  margin-left: 10px;
+}
+
+.NavBar {
+  background-color: white;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.125);
+  display: flex;
+  justify-content: space-between;
+  margin: 7px;
+}
+
+.nav-link.active {
+  font-weight: bold;
+  color: black;
+}
+
+.carvana-car:hover {
+  border-radius: 50%;
+  border: 2px solid lightblue;
+}

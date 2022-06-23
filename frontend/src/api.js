@@ -5,10 +5,6 @@ const API_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 class AdvocateAPI {
   static token;
 
-  static setToken(newToken) {
-    this.token = newToken;
-  }
-
   static async request(endpoint, data = {}, method = 'GET') {
     console.debug('API Call:', endpoint, data, method);
 

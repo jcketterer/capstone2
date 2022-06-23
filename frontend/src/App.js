@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import UserContext from './auth/UserContext';
 import HomePage from './homepage/Homepage';
 import LoadingSpinner from './common/LoadingSpinner';
+import NavBar from './nav-routes/NavBar';
+import Routes from './nav-routes/Routes';
 import useLocalStorage from './hooks/useLocalStorage';
 import AdvocateAPI from './api';
 import jwt from 'jsonwebtoken';
@@ -25,7 +27,7 @@ function App() {
           try {
             let { username } = jwt.decode(token);
             AdvocateAPI.token = token;
-            let currUser = await AdvocateAPI.getCurrUser(username);
+            let currUser = await AdvocateAPI.getUser(username);
             setCurrUser(currUser);
           } catch (err) {
             console.error('App loadUserInfo: error loading', err);
@@ -40,9 +42,14 @@ function App() {
     [token]
   );
 
-  const logout = async registerData => {
+  const logout = () => {
+    setCurrUser(null);
+    setToken(null);
+  };
+
+  const register = async registerData => {
     try {
-      let token = await AdvocateAPI.register(registerData);
+      let token = await AdvocateAPI.reg(registerData);
       setToken(token);
       return { success: true };
     } catch (err) {
@@ -62,10 +69,13 @@ function App() {
     }
   };
 
+  if (!infoLoaded) return <LoadingSpinner />;
+
   return (
-    <UserContext.Provider value={{ currUser }}>
+    <UserContext.Provider value={{ currUser, setCurrUser }}>
       <div className="App">
-        <HomePage />
+        <NavBar logout={logout} />
+        <Routes login={login} register={register} />
       </div>
     </UserContext.Provider>
   );

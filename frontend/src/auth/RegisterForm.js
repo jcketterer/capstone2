@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Alert from '../common/Alert';
 
@@ -24,7 +24,18 @@ const RegisterForm = ({ register }) => {
     formErrors
   );
 
-  handleSubmit = async e => {
+  const handleSubmit = async e => {
+    e.preventDefault();
+    let res = await register(formData);
+
+    if (res.success) {
+      history.push('/advocates');
+    } else {
+      setFormErrors(res.errors);
+    }
+  };
+
+  const handleChange = e => {
     const { name, value } = e.target;
     setFormData(data => ({ ...data, [name]: value }));
   };
