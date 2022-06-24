@@ -5,6 +5,10 @@ const API_URL = process.env.REACT_APP_BASE_URL || 'http://localhost:3001';
 class AdvocateAPI {
   static token;
 
+  static setToken(newToken) {
+    this.token = newToken;
+  }
+
   static async request(endpoint, data = {}, method = 'GET') {
     console.debug('API Call:', endpoint, data, method);
 
@@ -39,7 +43,7 @@ class AdvocateAPI {
     return res.skill;
   }
 
-  static async getSkills(name = '') {
+  static async getSkillByName(name = '') {
     let data = {};
     if (name !== '') data.name = name;
 
@@ -139,7 +143,7 @@ class AdvocateAPI {
   static async updateUserInfo(username, firstName, lastName, email, password) {
     try {
       try {
-        await this.doLogin(username, password);
+        await this.login(username, password);
       } catch (err) {
         throw err;
       }

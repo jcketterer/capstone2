@@ -1,0 +1,19 @@
+.login {
+  transition: transform 0.1s ease-out;
+  box-shadow: 0 5px 0 #0e59c9;
+}
+
+.login:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+.sign-up {
+  transition: transform 0.1s ease-out;
+  box-shadow: 0 5px 0 #0e59c9;
+}
+
+.sign-up:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
