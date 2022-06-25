@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
 import UserContext from '../UserContext';
 import AdvocateForm from './AdvocateForm';
-import Container from 'react-bootstrap/Container';
+import './LoginForm.css';
 
 const LoginForm = ({ loginFunction }) => {
   const user = useContext(UserContext);

@@ -8,27 +8,33 @@ const NavBar = () => {
 
   const loggedInNav = () => {
     return (
-      <nav class="NavBar navbar navbar-expand-md mx-2">
-        <div className="collapse navbar-collapse mx-3" id="navbarNav">
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <NavLink className="nav-link mr-4" aria-current="page" to="/login">
-                Adovcates
-              </NavLink>
-            </li>
-            <li className="nav-item mr-4">
-              <NavLink className="nav-link" to="/signup">
-                Skills
-              </NavLink>
-            </li>
-            <li className="nav-item mr-4">
-              <NavLink className="nav-link" to="/logout">
-                Logout
-              </NavLink>
-            </li>
-          </ul>
-        </div>
-      </nav>
+      <ul className="navbar-nav">
+        {user.isAdmin ? (
+          <NavLink className="nav-link" to="/admin">
+            Admin Dash
+          </NavLink>
+        ) : null}
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/advocate">
+            Adovcates
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/skills">
+            Skills
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/logout">
+            Logout
+          </NavLink>
+        </li>
+        <li className="nav-item">
+          <NavLink className="nav-link" to="/profile">
+            {user.firstName} Profile
+          </NavLink>
+        </li>
+      </ul>
     );
   };
 
@@ -41,7 +47,7 @@ const NavBar = () => {
           </NavLink>
         </li>
         <li className="nav-item mr-4">
-          <NavLink className="nav-link" to="/register">
+          <NavLink className="nav-link" to="/signup">
             Register
           </NavLink>
         </li>

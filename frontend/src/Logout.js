@@ -15,9 +15,11 @@ const Logout = ({ logoutFunction }) => {
   };
 
   return (
-    <Link to="/" onClick={delayThenLogout}>
-      Confirm Logout{' '}
-    </Link>
+    <div className="Logout">
+      <Link to="/" onClick={delayThenLogout}>
+        Confirm Logout{' '}
+      </Link>
+    </div>
   );
 };
 
