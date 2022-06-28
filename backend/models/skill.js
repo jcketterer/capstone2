@@ -76,6 +76,28 @@ class Skill {
     return res.rows;
   }
 
+  static async getSkill(id) {
+    let skillRes;
+
+    if (id) {
+      skillRes = await db.query(
+        `
+          SELECT 
+            name
+          FROM skills
+          WHERE skill_id = $1
+        `,
+        [id]
+      );
+    } else throw new BadRequestError('Please a skill name');
+
+    let skill = skillRes.rows[0];
+
+    if (!skill) throw new NotFoundError('Skill Not Found');
+
+    return skill;
+  }
+
   static async renameSkill(name, data) {
     if (Object.entries(data).length === 0) {
       throw new BadRequestError('No data provided to update');
