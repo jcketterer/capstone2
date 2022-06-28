@@ -38,9 +38,9 @@ class AdvocateAPI {
     return res;
   }
 
-  static async getSkill(name) {
-    let res = await this.request(`skill/${name}`);
-    return res.skill;
+  static async getSkill(id) {
+    let res = await this.request(`skill/${id}`);
+    return res.skills;
   }
 
   static async getSkillByName(name = '') {
@@ -48,7 +48,7 @@ class AdvocateAPI {
     if (name !== '') data.name = name;
 
     let res = await this.request(`skill/`, data);
-    return res.skill;
+    return res.skills;
   }
 
   static async editSkill(skill) {
@@ -56,6 +56,7 @@ class AdvocateAPI {
     delete skillToEdit.name;
 
     let res = await this.request(`skill/${skill.name}`, skillToEdit, 'PATCH');
+    console.log(res);
     return res;
   }
 
@@ -63,6 +64,7 @@ class AdvocateAPI {
 
   static async addAdvocate(advocate) {
     let res = await this.request(`advo/`, advocate, 'POST');
+    console.log(res);
     return res.advocate;
   }
 
@@ -73,10 +75,11 @@ class AdvocateAPI {
 
   static async getAdvocate(advocateId) {
     let res = await this.request(`advo/${advocateId}`);
+    console.log(res);
     return res.advocate;
   }
 
-  static async getAdvocate(
+  static async getAdvocates(
     firstName = '',
     lastName = '',
     email = '',
@@ -93,16 +96,19 @@ class AdvocateAPI {
     if (manager !== '') data.manager = manager;
 
     let res = await this.request(`advo/`, data);
-    return res.advocate;
+    console.log(res);
+    return res.advocates;
   }
 
   static async editAdvocate(advocateId, updatedAdvocate) {
     let res = await this.request(`advo/${advocateId}`, updatedAdvocate, 'PATCH');
+    console.log(res);
     return res;
   }
 
   static async indicateSkillsAssingedToAdvocate(listOfSkills, advocateId) {
     let advocate = await this.getAdvocate(advocateId);
+    console.log(advocate);
     return listOfSkills.map(skill => {
       return { ...skill, skillsAssigned: advocate.skill.includes(skill.name) };
     });

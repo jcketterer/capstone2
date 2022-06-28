@@ -20,3 +20,9 @@
   height: 40px;
   margin-right: 10px;
 }
+
+.vertbar {
+  border-right: 1px solid rgb(198, 198, 198);
+  width: 0px;
+  height: 50px;
+}

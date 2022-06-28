@@ -42,9 +42,9 @@ const AddAdvocateForm = () => {
     {
       name: 'hireDate',
       label: 'Hire Date',
-      inputType: 'date',
+      inputType: 'text',
       initialValue: '',
-      placeholder: 'Please enter advocates date of hire',
+      placeholder: 'YYYY-MM-DD',
       required: true,
     },
     {
@@ -56,11 +56,11 @@ const AddAdvocateForm = () => {
       required: true,
     },
     {
-      name: 'currentMilestoneStartDate',
+      name: 'current_milestone_start_date',
       label: 'Milestone Start Date',
-      inputType: 'date',
+      inputType: 'text',
       initialValue: '',
-      placeholder: 'Please enter advocates current milestone start date',
+      placeholder: 'YYYY-MM-DD',
       required: true,
     },
     {
@@ -72,7 +72,7 @@ const AddAdvocateForm = () => {
       required: true,
     },
     {
-      name: 'Manager',
+      name: 'manager',
       label: 'Manager',
       inputType: 'text',
       initialValue: '',

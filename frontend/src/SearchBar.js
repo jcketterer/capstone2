@@ -16,22 +16,24 @@ const SearchBar = ({ onSubmit }) => {
 
   return (
     <div className="SearchBar">
-      <form className="align-items-center">
-        <label htmlFor="searchTerm" srOnly>
-          Search...
-        </label>
-        <input
-          className="mb-3"
-          id="searchTerm"
-          name="searchTerm"
-          value={formData.searchTerm}
-          placeholder=""
-          onChange={handleChange}
-        />
-      </form>
-      <button type="submit" className="btn btn-primary mb-3">
-        Search
-      </button>
+      <div className="form-group">
+        <form className="align-items-center" onSubmit={handleSubmit}>
+          <label className="mx-3" htmlFor="searchTerm">
+            Search
+          </label>
+          <input
+            className="mb-3"
+            id="searchTerm"
+            name="searchTerm"
+            value={formData.searchTerm}
+            placeholder=""
+            onChange={handleChange}
+          />
+        </form>
+        <button type="submit" className="btn btn-primary mb-3">
+          Submit
+        </button>
+      </div>
     </div>
   );
 };

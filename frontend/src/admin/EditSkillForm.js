@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const EditSkillForm = () => {
   const user = useContext(UserContext);
-  const { name } = useParams();
+  const { name, id } = useParams();
   const setMessage = useContext(AlertContext);
   const [skill, setSkill] = useState({});
   const [needsInitFormUpdate, setNeedsInitFormUpdate] = useState(false);
@@ -21,10 +21,10 @@ const EditSkillForm = () => {
   useEffect(() => {
     let isRendered = true;
 
-    async function getSkills(name) {
+    async function getSkill(id) {
       try {
         if (isRendered && user.username) {
-          let skillRes = await AdvocateAPI.getSkill(name);
+          let skillRes = await AdvocateAPI.getSkill(id);
           setSkill({ ...skillRes });
           setNeedsInitFormUpdate(true);
         }
@@ -32,12 +32,12 @@ const EditSkillForm = () => {
         console.log(err);
       }
     }
-    getSkills(name);
+    getSkill(id);
 
     return () => {
       isRendered = false;
     };
-  }, [user.username, name]);
+  }, [user.username, skill, name]);
 
   useEffect(() => {
     if (needsInitFormUpdate) {
@@ -80,7 +80,7 @@ const EditSkillForm = () => {
     edit(formData);
   };
 
-  if (!user) {
+  if (!user.isAdmin) {
     return <Redirect to="/" />;
   }
 
