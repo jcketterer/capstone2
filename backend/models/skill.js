@@ -46,7 +46,7 @@ class Skill {
     return res.rows;
   }
 
-  static async findEmailsPerSkill(filters) {
+  static async findSkillByName(filters) {
     const { name } = filters || {};
 
     if (!name) return Skill.findAll();
@@ -62,13 +62,8 @@ class Skill {
     const res = await db.query(
       `
         SELECT 
-          s.name, 
-          a.email
-        FROM skills AS s
-        INNER JOIN advocate_skills AS ads
-        ON ads.skill_name = s.name
-        INNER JOIN advocate AS a
-        ON ads.advocates_id = a.advocate_id
+          name
+        FROM skills 
         WHERE ${filterStr}
       `,
       vals
@@ -76,18 +71,18 @@ class Skill {
     return res.rows;
   }
 
-  static async getSkill(id) {
+  static async getSkill(name) {
     let skillRes;
 
-    if (id) {
+    if (name) {
       skillRes = await db.query(
         `
           SELECT 
             name
           FROM skills
-          WHERE skill_id = $1
+          WHERE name = $1
         `,
-        [id]
+        [name]
       );
     } else throw new BadRequestError('Please a skill name');
 

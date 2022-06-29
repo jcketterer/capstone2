@@ -43,7 +43,7 @@ router.get('/', ensureLoggedIn, async function (req, res, next) {
     if (!query) {
       skills = await Skill.findAll();
     } else {
-      skills = await Skill.findEmailsPerSkill(query);
+      skills = await Skill.findSkillByName(query);
     }
 
     return res.json({ skills });
@@ -52,7 +52,7 @@ router.get('/', ensureLoggedIn, async function (req, res, next) {
   }
 });
 
-router.get('/:id', ensureAdmin, async function (req, res, next) {
+router.get('/:name', ensureAdmin, async function (req, res, next) {
   try {
     const query = req.query;
     console.log(query);
@@ -62,7 +62,7 @@ router.get('/:id', ensureAdmin, async function (req, res, next) {
       throw new BadRequestError(errs);
     }
 
-    let skill = await Skill.getSkill(req.params.id);
+    let skill = await Skill.getSkill(req.params.name);
 
     return res.json({ skill });
   } catch (err) {
