@@ -93,16 +93,27 @@ const EditAdvocateInfoForm = () => {
     return <Redirect to="/" />;
   }
 
+  let hireDate = advocate.hireDate;
+  let hDate = new Date(hireDate);
+  let hireConvert = hDate.toDateString();
+
+  let milestoneDate = advocate.current_milestone_start_date;
+  let mDate = new Date(milestoneDate);
+  let mileConvert = mDate.toDateString();
+
   return (
-    <div className="EditAdvocateInfoForm justify-content-center">
-      <div className="col-md-8 col-sm-10">
+    <div className="EditAdvocateInfoForm">
+      <div className="container inline-block">
+        <h4 className="mb-3">{`Edit Advocate: ${advocate.firstName}`}</h4>
         <div className="card">
-          <h4 className="card-header">{`Edit Advocate: ${advocate.firstName}`}</h4>
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">
-                <label>First Name</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  First Name
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="firstName"
                   value={formData.firstName}
@@ -112,8 +123,11 @@ const EditAdvocateInfoForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Last Name</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Last Name
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="lastName"
                   value={formData.lastName}
@@ -123,8 +137,11 @@ const EditAdvocateInfoForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Email</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Email
+                </label>
                 <input
+                  className="form-control"
                   type="email"
                   name="email"
                   value={formData.email}
@@ -134,19 +151,25 @@ const EditAdvocateInfoForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Hire Date</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Hire Date
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="hireDate"
-                  value={formData.hireDate}
+                  value={formData.hireConvert}
                   onChange={handleChange}
                   required={false}
                   placeholder="YYYY-MM-DD"
                 />
               </div>
               <div className="form-group">
-                <label>Milestone</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Milestone
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="Milestone"
                   value={formData.milestone}
@@ -156,19 +179,25 @@ const EditAdvocateInfoForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Current Milestone Start Date</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Current Milestone Start Date
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="current_milestone_start_date"
-                  value={formData.current_milestone_start_date}
+                  value={formData.mileConvert}
                   onChange={handleChange}
                   required={false}
                   placeholder="YYYY-MM-DD"
                 />
               </div>
               <div className="form-group">
-                <label>Team Lead</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Team Lead
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="teamLead"
                   value={formData.teamLead}
@@ -178,8 +207,11 @@ const EditAdvocateInfoForm = () => {
                 />
               </div>
               <div className="form-group">
-                <label>Manager</label>
+                <label for="formGroupExampleInput" className="form-label">
+                  Manager
+                </label>
                 <input
+                  className="form-control"
                   type="text"
                   name="manager"
                   value={formData.manager}
@@ -188,7 +220,7 @@ const EditAdvocateInfoForm = () => {
                   placeholder="New Manager"
                 />
               </div>
-              <button type="submit" className="btn btn-primary btn-sm mr-2">
+              <button type="submit" className="btn btn-primary btn-sm m-2">
                 Edit Advcoate
               </button>
               <Link to="/admin">
