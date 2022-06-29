@@ -19,7 +19,7 @@ const AdminUserDash = () => {
             <Link to="/addskills">Add Skills</Link>
           </li>
           <li>
-            <Link to="/removeskills">Edit/Remove Skills</Link>
+            <Link to="/removeskills">Remove Skills</Link>
           </li>
         </ul>
         <h3>Advocates</h3>

@@ -1,39 +1,33 @@
 import React, { useState } from 'react';
+import './SearchBar.css';
 
-const SearchBar = ({ onSubmit }) => {
-  const [formData, setFormData] = useState({ searchTerm: '' });
+const SearchBar = ({ searchFor }) => {
+  const [searchTerm, setSearchTerm] = useState('');
 
   const handleChange = e => {
-    const { value } = e.target;
-    setFormData({ searchTerm: value });
+    setSearchTerm(e.target.value);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    onSubmit(formData.searchTerm);
-    setFormData({ searchTerm: '' });
+    searchFor(searchTerm.trim() || undefined);
+    setSearchTerm(searchTerm.trim());
   };
 
   return (
-    <div className="SearchBar">
-      <div className="form-group">
-        <form className="align-items-center" onSubmit={handleSubmit}>
-          <label className="mx-3" htmlFor="searchTerm">
-            Search
-          </label>
-          <input
-            className="mb-3"
-            id="searchTerm"
-            name="searchTerm"
-            value={formData.searchTerm}
-            placeholder=""
-            onChange={handleChange}
-          />
-        </form>
-        <button type="submit" className="btn btn-primary mb-3">
-          Submit
+    <div className="SearchBar mb-4">
+      <form className="form-inline" onSubmit={handleSubmit}>
+        <input
+          className="form-control form-control-lg flex-grow-1"
+          name="searchTerm"
+          placeholder=""
+          value={searchTerm}
+          onChange={handleChange}
+        />
+        <button className="btn btn-sm btn-primary mt-2" type="submit">
+          Search
         </button>
-      </div>
+      </form>
     </div>
   );
 };

@@ -30,7 +30,6 @@ const EditUserForm = ({ editUserFunction }) => {
       inputType: 'text',
       initialValue: user.firstName,
       required: true,
-      readOnly: true,
     },
     {
       name: 'lastName',
@@ -38,7 +37,6 @@ const EditUserForm = ({ editUserFunction }) => {
       inputType: 'text',
       initialValue: user.lastName,
       required: true,
-      readOnly: true,
     },
     {
       name: 'email',
@@ -46,7 +44,6 @@ const EditUserForm = ({ editUserFunction }) => {
       inputType: 'email',
       initialValue: user.email,
       required: true,
-      readOnly: true,
     },
     {
       name: 'password',
@@ -54,7 +51,6 @@ const EditUserForm = ({ editUserFunction }) => {
       inputType: 'password',
       initialValue: user.password,
       required: true,
-      readOnly: true,
     },
   ];
 

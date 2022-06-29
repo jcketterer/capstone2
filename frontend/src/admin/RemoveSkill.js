@@ -2,9 +2,7 @@ import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 import UserContext from '../UserContext';
 import AdvocateAPI from '../api';
-import AlertContext from '../AlertContext';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar';
 
 const RemoveSkill = () => {
   const user = useContext(UserContext);
@@ -34,6 +32,11 @@ const RemoveSkill = () => {
     };
   }, [filter, user.isAdmin, needsUpdate, skills]);
 
+  useEffect(function getSkillOnMount() {
+    console.debug('Skill List useEffect getSkillsOnMount');
+    search();
+  }, []);
+
   const remove = useCallback(
     async skill => {
       let removeRes = await AdvocateAPI.deletedSkill(skill.name);
@@ -54,9 +57,13 @@ const RemoveSkill = () => {
     return <Redirect to="/" />;
   }
 
+  const search = async name => {
+    let skill = await AdvocateAPI.getSkill(name);
+    setSkills(skill);
+  };
+
   return (
     <div className="RemoveSkill container">
-      <SearchBar onSubmit={setFilter} />
       <hr />
       {skills.length > 0 ? (
         <ul>
@@ -70,9 +77,7 @@ const RemoveSkill = () => {
                 >
                   Remove Skill
                 </button>
-                <Link to={`/skill/${skill.name}/edit`}>
-                  <button className="btn btn-primary btn-sm mx-3">Edit Skill</button>
-                </Link>
+
                 <hr />
               </li>
             );

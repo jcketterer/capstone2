@@ -59,6 +59,34 @@ const getHelpFunctions = (user, setUser, setMessage, setToken) => {
     }
   }
 
+  async function adminSignUp(adminData) {
+    const { username, password, firstName, lastName, email, isAdmin } = adminData;
+
+    try {
+      let newUserRes = await AdvocateAPI.createNewAdmin(
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        isAdmin
+      );
+      setUser(newUserRes.user);
+      setToken(newUserRes.token);
+
+      setMessage({
+        text: `Welcome! ${firstName}!`,
+        variant: 'success',
+      });
+    } catch (err) {
+      console.log(err);
+      setMessage({
+        text: 'Could not create user. Username is already in use',
+        variant: 'danger',
+      });
+    }
+  }
+
   async function editUser(editUserData) {
     const { username, firstName, lastName, email, password } = editUserData;
 
@@ -80,7 +108,7 @@ const getHelpFunctions = (user, setUser, setMessage, setToken) => {
       });
     }
   }
-  return [login, logout, signup, editUser];
+  return [login, logout, signup, editUser, adminSignUp];
 };
 
 const useLocalStorage = (key, initialValue) => {

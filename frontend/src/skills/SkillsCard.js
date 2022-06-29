@@ -2,9 +2,13 @@ import React from 'react';
 
 const SkillCard = ({ skill }) => {
   return (
-    <ul>
-      <li>{skill.name}</li>
-    </ul>
+    <div className="card">
+      <div className="card-body">
+        <ul style={{ listStyleType: 'none' }}>
+          <li className="lead">{skill.name}</li>
+        </ul>
+      </div>
+    </div>
   );
 };
 

@@ -3,7 +3,6 @@ import { Redirect } from 'react-router-dom';
 import UserContext from '../UserContext';
 import AdvocateAPI from '../api';
 import { Link } from 'react-router-dom';
-import SearchBar from '../SearchBar';
 
 const RemoveAdvocate = () => {
   const user = useContext(UserContext);
@@ -19,7 +18,6 @@ const RemoveAdvocate = () => {
       try {
         if (isRendered && needsUpdate && user.isAdmin) {
           let advocateRes = await AdvocateAPI.getAdvocates(filterString);
-          console.log(advocateRes);
           setAdvocates(advocateRes);
           setNeedsUpdate(false);
         }
@@ -33,6 +31,11 @@ const RemoveAdvocate = () => {
       isRendered = false;
     };
   }, [filter, user.isAdmin, advocates, needsUpdate]);
+
+  useEffect(function getCompanyOnMount() {
+    console.debug('CompanyList useEffect getCompaniesOnMount');
+    search();
+  }, []);
 
   const remove = useCallback(
     async advocates => {
@@ -51,6 +54,11 @@ const RemoveAdvocate = () => {
     [advocates]
   );
 
+  const search = async filter => {
+    let advocate = await AdvocateAPI.getAdvocates(filter);
+    setAdvocates(advocate);
+  };
+
   if (!user.isAdmin) {
     return <Redirect to="/" />;
   }
@@ -58,32 +66,36 @@ const RemoveAdvocate = () => {
   return (
     <div className="RemoveAdvocate">
       <div className="container">
-        <SearchBar onSubmit={setFilter} />
+        <h3 className="display-6 mb-4">Edit/Remove Advocates</h3>
         {advocates.length > 0 ? (
-          <ul>
+          <ul style={{ listStyleType: 'none' }}>
             {advocates.map(advo => {
               return (
-                <li key={advo.advcoateId}>
-                  <h5 className="">{advo.email}</h5>
-                  <div className="d-inline-flex flex-column justify-content-end">
-                    <Link to={`advocate/${advo.advocateId}/editadvocateinfo`}>
-                      <button className="btn btn-primary btn-sm">
-                        Edit Advocate Information
-                      </button>
-                    </Link>
-                    <Link to={`advocate/${advo.advocateId}/editadvocateskills`}>
-                      <button className="btn btn-primary btn-sm mt-1">
-                        Edit Advocate Skills
-                      </button>
-                    </Link>
-                    <button
-                      onClick={() => remove(advo)}
-                      className="btn btn-outline-danger btn-sm mt-1"
-                    >
-                      Remove Advocate
-                    </button>
+                <div className="card">
+                  <div className="card-body">
+                    <li key={advo.email}>
+                      <h4 className="mb-2">
+                        {advo.firstName} {advo.lastName}
+                      </h4>
+                      <h5 className="">{advo.email}</h5>
+                      <div className="d-flex justify-content-end">
+                        <div>
+                          <Link to={`advocate/${advo.advocateId}/editadvocateinfo`}>
+                            <button className="btn btn-primary btn-sm mx-3">
+                              Edit Advocate Information
+                            </button>
+                          </Link>
+                          <button
+                            onClick={() => remove(advo)}
+                            className="btn btn-outline-danger btn-sm"
+                          >
+                            Remove Advocate
+                          </button>
+                        </div>
+                      </div>
+                    </li>
                   </div>
-                </li>
+                </div>
               );
             })}
           </ul>

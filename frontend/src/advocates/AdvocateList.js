@@ -4,7 +4,6 @@ import UserContext from '../UserContext';
 import AdvocateAPI from '../api';
 import { Link } from 'react-router-dom';
 import AdvocateCard from './AdvocateCard';
-import SearchBar from '../SearchBar';
 
 const AdvocateList = () => {
   const user = useContext(UserContext);
@@ -38,8 +37,8 @@ const AdvocateList = () => {
   return (
     <div className="AdvocateList">
       <div className="container">
+        <h3 className="display-3 mb-3">Advocates:</h3>
         <div className="d-inline-flex flex-column">
-          <SearchBar onSubmit={setFilter} />
           {advocates.length > 0 ? (
             advocates.map(advocate => (
               <AdvocateCard advocate={advocate} key={advocate.advocateId} />

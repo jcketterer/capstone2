@@ -15,9 +15,8 @@ import AdvocateDetail from './advocates/AdvocateDetail';
 import AdvocateList from './advocates/AdvocateList';
 import SkillList from './skills/SkillList';
 import EditAdvocateInfoForm from './admin/EditAdvocateInfoForm';
-import EditSkillForm from './admin/EditSkillForm';
 
-const Routes = ({ login, logout, signup, editUser }) => {
+const Routes = ({ login, logout, signup, editUser, createNewAdmin }) => {
   return (
     <Switch>
       <Route exact path="/">
@@ -37,9 +36,6 @@ const Routes = ({ login, logout, signup, editUser }) => {
       </Route>
       <Route exact path="/removeadvocate">
         <RemoveAdvocate />
-      </Route>
-      <Route exact path="/skills/:name/edit">
-        <EditSkillForm />
       </Route>
       <Route exact path="/advocate">
         <AdvocateList />

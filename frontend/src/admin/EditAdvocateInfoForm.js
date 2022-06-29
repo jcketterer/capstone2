@@ -98,9 +98,6 @@ const EditAdvocateInfoForm = () => {
       <div className="col-md-8 col-sm-10">
         <div className="card">
           <h4 className="card-header">{`Edit Advocate: ${advocate.firstName}`}</h4>
-          <Link to={`/advocate/${id}/editskills`}>
-            <button className="btn btn-primary btn-sm">Edit Skills Here</button>
-          </Link>
           <div className="card-body">
             <form onSubmit={handleSubmit}>
               <div className="form-group">

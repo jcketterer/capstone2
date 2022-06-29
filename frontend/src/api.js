@@ -38,8 +38,9 @@ class AdvocateAPI {
     return res;
   }
 
-  static async getSkill(id) {
-    let res = await this.request(`skill/${id}`);
+  static async getSkill(name) {
+    let res = await this.request(`skill/${name}`);
+    console.log(res);
     return res.skills;
   }
 
@@ -52,11 +53,11 @@ class AdvocateAPI {
   }
 
   static async editSkill(skill) {
-    let skillToEdit = { ...skill };
-    delete skillToEdit.name;
+    let skillToSend = { ...skill };
+    console.log(skillToSend);
+    delete skillToSend.name;
 
-    let res = await this.request(`skill/${skill.name}`, skillToEdit, 'PATCH');
-    console.log(res);
+    let res = await this.request(`skill/${skill.name}`, skillToSend, 'PATCH');
     return res;
   }
 
@@ -75,7 +76,6 @@ class AdvocateAPI {
 
   static async getAdvocate(advocateId) {
     let res = await this.request(`advo/${advocateId}`);
-    console.log(res);
     return res.advocate;
   }
 
@@ -96,27 +96,24 @@ class AdvocateAPI {
     if (manager !== '') data.manager = manager;
 
     let res = await this.request(`advo/`, data);
-    console.log(res);
     return res.advocates;
   }
 
   static async editAdvocate(advocateId, updatedAdvocate) {
     let res = await this.request(`advo/${advocateId}`, updatedAdvocate, 'PATCH');
-    console.log(res);
     return res;
   }
 
   static async indicateSkillsAssingedToAdvocate(listOfSkills, advocateId) {
     let advocate = await this.getAdvocate(advocateId);
-    console.log(advocate);
     return listOfSkills.map(skill => {
-      return { ...skill, skillsAssigned: advocate.skill.includes(skill.name) };
+      return { ...skill };
     });
   }
 
   static async addSkillToAdvo(advocateId, skillName) {
     try {
-      let res = await this.request(`advo/${advocateId}/addskill/${skillName}`);
+      let res = await this.request(`advo/${advocateId}/addskill/${skillName}`, 'POST');
       return res;
     } catch (err) {
       return err;
@@ -169,6 +166,21 @@ class AdvocateAPI {
       let res = await this.request(
         'auth/reg',
         { username, password, firstName, lastName, email },
+        'POST'
+      );
+      this.setToken(res.token);
+
+      let newUser = await this.getUser(username);
+      return { user: newUser, token: res.token };
+    } catch (err) {
+      console.error(err);
+    }
+  }
+  static async createNewAdmin(username, password, firstName, lastName, email, isAdmin = true) {
+    try {
+      let res = await this.request(
+        'users',
+        { username, password, firstName, lastName, email, isAdmin },
         'POST'
       );
       this.setToken(res.token);
