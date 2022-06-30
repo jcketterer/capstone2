@@ -6,9 +6,7 @@ const AdvocateCard = ({ advocate }) => {
     <div className="card">
       <div className="card-body">
         <Link to={`/advocate/${advocate.advocateId}`}>
-          <div className="card-title">
-            {advocate.firstName} {advocate.lastName}
-          </div>
+          <div className="card-title">{advocate.email}</div>
         </Link>
       </div>
     </div>

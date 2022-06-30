@@ -96,6 +96,7 @@ class AdvocateAPI {
     if (manager !== '') data.manager = manager;
 
     let res = await this.request(`advo/`, data);
+    console.log(res);
     return res.advocates;
   }
 
@@ -107,7 +108,7 @@ class AdvocateAPI {
   static async indicateSkillsAssingedToAdvocate(listOfSkills, advocateId) {
     let advocate = await this.getAdvocate(advocateId);
     return listOfSkills.map(skill => {
-      return { ...skill };
+      return { ...skill, onHand: advocate.skills.includes(skill.name) };
     });
   }
 
