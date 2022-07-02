@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="AddSkillForm"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="AdvocateForm justify-content-center row"
+      >
+        <div
+          class="col-md-8 col-sm-10"
+        >
+          <div
+            class="card"
+          >
+            <h4
+              class="card-header"
+            >
+              Add Skill
+            </h4>
+            <div
+              class="card-body"
+            >
+              <form
+                class=""
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="name"
+                  >
+                    Name:
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="name"
+                    name="name"
+                    placeholder="Please enter new skill name"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <button
+                  class="mr-2 btn btn-primary"
+                  type="submit"
+                >
+                  Add Skill
+                </button>
+                <a
+                  class="btn btn-secondary"
+                  href="/skills"
+                >
+                  Back
+                </a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render and match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="AdvocateList"
+  >
+    <div
+      class="container"
+    >
+      <h3
+        class="display-3 mb-3"
+      >
+        Advocates:
+      </h3>
+      <div
+        class="d-inline-flex flex-column"
+      >
+        <p>
+          Advocate Not Found
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render and match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="AdvocateDetail col-md-8 offset-md-2"
+  >
+    <div
+      class="card"
+    >
+      <div
+        class="card-header"
+      >
+        <h2
+          class="display-4"
+        >
+           
+        </h2>
+      </div>
+      <div
+        class="card-body"
+      >
+        <h3>
+          Email: 
+        </h3>
+        <h3>
+          Hire Date: Invalid Date
+        </h3>
+        <h3>
+          Milestone: 
+        </h3>
+        <h3>
+          Current Milestone Start Date: Invalid Date
+        </h3>
+        <h3>
+          Team Lead: 
+        </h3>
+        <h3>
+          Manager: 
+        </h3>
+        <div
+          class="blockquote"
+        >
+          Skills:
+          <ul
+            style="list-style-type: none;"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

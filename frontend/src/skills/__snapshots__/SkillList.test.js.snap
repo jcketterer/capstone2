@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="SkillList"
+  >
+    <div
+      class="container"
+    >
+      <h3
+        class="display-3 mb-3"
+      >
+        Skills:
+      </h3>
+      <div
+        class="d-inline-flex flex-column"
+      >
+        <p>
+          No skills found.
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

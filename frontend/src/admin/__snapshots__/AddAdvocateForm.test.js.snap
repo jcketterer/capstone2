@@ -1,0 +1,203 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should match the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="AddAdvocateForm"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="AdvocateForm justify-content-center row"
+      >
+        <div
+          class="col-md-8 col-sm-10"
+        >
+          <div
+            class="card"
+          >
+            <h4
+              class="card-header"
+            >
+              Add Advocate
+            </h4>
+            <div
+              class="card-body"
+            >
+              <form
+                class=""
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="firstName"
+                  >
+                    First Name
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Please enter advocates first name"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="lastName"
+                  >
+                    Last Name
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="lastName"
+                    name="lastName"
+                    placeholder="Please enter advocates last name"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="email"
+                  >
+                    Email
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Please enter advocates email"
+                    required=""
+                    type="email"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="hireDate"
+                  >
+                    Hire Date
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="hireDate"
+                    name="hireDate"
+                    placeholder="YYYY-MM-DD"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="milestone"
+                  >
+                    Milestone
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="milestone"
+                    name="milestone"
+                    placeholder="Please enter advocates Milesonte (e.g. M1)"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="current_milestone_start_date"
+                  >
+                    Milestone Start Date
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="current_milestone_start_date"
+                    name="current_milestone_start_date"
+                    placeholder="YYYY-MM-DD"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="teamLead"
+                  >
+                    Team Lead
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="teamLead"
+                    name="teamLead"
+                    placeholder="Please enter advocates current Team Lead"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="manager"
+                  >
+                    Manager
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="manager"
+                    name="manager"
+                    placeholder="Please enter Team Leads current Manager"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <button
+                  class="mr-2 btn btn-primary"
+                  type="submit"
+                >
+                  Add!
+                </button>
+                <a
+                  class="btn btn-secondary"
+                  href="/admin"
+                >
+                  Back
+                </a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,83 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches the snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="LoginForm"
+  >
+    <div
+      class="container justify-content-center"
+    >
+      <div
+        class="AdvocateForm justify-content-center row"
+      >
+        <div
+          class="col-md-8 col-sm-10"
+        >
+          <div
+            class="card"
+          >
+            <h4
+              class="card-header"
+            >
+              Login
+            </h4>
+            <div
+              class="card-body"
+            >
+              <form
+                class=""
+              >
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="username"
+                  >
+                    Username
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="username"
+                    name="username"
+                    placeholder="Please enter your username"
+                    required=""
+                    type="text"
+                    value=""
+                  />
+                </div>
+                <div
+                  class="form-group"
+                >
+                  <label
+                    class="form-label"
+                    for="password"
+                  >
+                    Password
+                  </label>
+                  <input
+                    class="my-2 form-control"
+                    id="password"
+                    name="password"
+                    placeholder="Please enter your password"
+                    required=""
+                    type="password"
+                    value=""
+                  />
+                </div>
+                <button
+                  class="mr-2 btn btn-primary"
+                  type="submit"
+                >
+                  Login
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

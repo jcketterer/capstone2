@@ -32,11 +32,6 @@ const RemoveSkill = () => {
     };
   }, [filter, user.isAdmin, needsUpdate, skills]);
 
-  useEffect(function getSkillOnMount() {
-    console.debug('Skill List useEffect getSkillsOnMount');
-    search();
-  }, []);
-
   const remove = useCallback(
     async skill => {
       let removeRes = await AdvocateAPI.deletedSkill(skill.name);
